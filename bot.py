@@ -1,25 +1,3 @@
-"""
-Бот-администратор: автоматически одобряет ВСЕ заявки на вступление в канал.
-
-Как это работает:
-  В канале включена настройка "Одобрять новых участников" (заявки на вступление).
-  Каждый раз, когда кто-то подаёт заявку, Telegram присылает боту событие
-  chat_join_request. Бот сразу его одобряет.
-
-Настройка перед запуском:
-  1. Создать бота у @BotFather, получить токен.
-  2. Добавить бота в канал как АДМИНИСТРАТОРА.
-     Обязательное право: "Приглашение пользователей по ссылке"
-     (Invite Users / Add New Admins не нужен, только Invite Users).
-  3. В самом канале должна быть включена настройка "Одобрять новых участников"
-     (Channel Settings -> Subscribers -> Approve New Subscribers, либо
-     "Заявки на вступление" в настройках канала).
-
-Запуск:
-  pip install -r requirements.txt
-  BOT_TOKEN=xxxx python bot.py
-"""
-
 import asyncio
 import logging
 import os
@@ -37,7 +15,6 @@ router = Router()
 
 @router.chat_join_request()
 async def approve_all(request: ChatJoinRequest):
-    """Срабатывает на каждую заявку на вступление и сразу её одобряет."""
     try:
         await request.approve()
         log.info(
